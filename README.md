@@ -8,6 +8,8 @@ Drag the folder into your SuperCollider Extensions folder. It's probably in /usr
 
 If it doesn't work, you will need to download FAUST and run the faust2supercollider script. Running the faust2supercollider script that will generate these files.
 
+## Example
+
 ```supercollider
 (
 // Multi-Band Distortion
