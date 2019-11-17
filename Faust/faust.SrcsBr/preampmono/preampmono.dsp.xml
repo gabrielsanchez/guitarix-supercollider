@@ -1,0 +1,92 @@
+
+<faust>
+	<name>RedeyePreMono</name>
+	<author></author>
+	<copyright></copyright>
+	<license></license>
+	<version></version>
+	<classname>mydsp</classname>
+	<inputs>1</inputs>
+	<outputs>1</outputs>
+	<ui>
+		<activewidgets>
+			<count>6</count>
+			<widget type="vslider" id="1">
+				<label>Input</label>
+				<varname>fVslider0</varname>
+				<init>0.0f</init>
+				<min>-20.0f</min>
+				<max>20.0f</max>
+				<step>0.10000000000000001f</step>
+			</widget>
+			<widget type="vslider" id="2">
+				<label>Output</label>
+				<varname>fVslider5</varname>
+				<init>0.0f</init>
+				<min>-20.0f</min>
+				<max>20.0f</max>
+				<step>0.10000000000000001f</step>
+			</widget>
+			<widget type="vslider" id="3">
+				<label>Feedback</label>
+				<varname>fVslider2</varname>
+				<init>-12.0f</init>
+				<min>-75.0f</min>
+				<max>-3.0f</max>
+				<step>0.10000000000000001f</step>
+			</widget>
+			<widget type="vslider" id="4">
+				<label>Presence</label>
+				<varname>fVslider4</varname>
+				<init>0.0f</init>
+				<min>0.0f</min>
+				<max>10.0f</max>
+				<step>0.10000000000000001f</step>
+			</widget>
+			<widget type="vslider" id="5">
+				<label>Resonance</label>
+				<varname>fVslider3</varname>
+				<init>0.0f</init>
+				<min>0.0f</min>
+				<max>10.0f</max>
+				<step>0.10000000000000001f</step>
+			</widget>
+			<widget type="vslider" id="6">
+				<label>Drive</label>
+				<varname>fVslider1</varname>
+				<init>0.0f</init>
+				<min>-15.0f</min>
+				<max>15.0f</max>
+				<step>0.10000000000000001f</step>
+			</widget>
+		</activewidgets>
+		
+		<passivewidgets>
+			<count>0</count>
+		</passivewidgets>
+		
+		<layout>
+			<group type="vgroup">
+				<label>0x00</label>
+				<group type="hgroup">
+					<label>Input</label>
+					<widgetref id="1" />
+				</group>
+				<group type="hgroup">
+					<label>Output</label>
+					<widgetref id="2" />
+				</group>
+				<group type="hgroup">
+					<label>Processing</label>
+					<widgetref id="3" />
+					<widgetref id="4" />
+					<widgetref id="5" />
+				</group>
+				<group type="hgroup">
+					<label>Tube</label>
+					<widgetref id="6" />
+				</group>
+			</group>
+		</layout>
+	</ui>
+</faust>

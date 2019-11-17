@@ -1,0 +1,53 @@
+
+<faust>
+	<name>feed</name>
+	<author></author>
+	<copyright></copyright>
+	<license></license>
+	<version></version>
+	<classname>mydsp</classname>
+	<inputs>1</inputs>
+	<outputs>2</outputs>
+	<ui>
+		<activewidgets>
+			<count>3</count>
+			<widget type="hslider" id="1">
+				<label>amp.feedback</label>
+				<varname>fHslider1</varname>
+				<init>0.0f</init>
+				<min>-1.0f</min>
+				<max>1.0f</max>
+				<step>0.01f</step>
+			</widget>
+			<widget type="hslider" id="2">
+				<label>amp.feedforward</label>
+				<varname>fHslider2</varname>
+				<init>0.0f</init>
+				<min>-1.0f</min>
+				<max>1.0f</max>
+				<step>0.01f</step>
+			</widget>
+			<widget type="hslider" id="3">
+				<label>amp.fuzz</label>
+				<varname>fHslider0</varname>
+				<init>1.0f</init>
+				<min>0.0f</min>
+				<max>1.0f</max>
+				<step>0.01f</step>
+			</widget>
+		</activewidgets>
+		
+		<passivewidgets>
+			<count>0</count>
+		</passivewidgets>
+		
+		<layout>
+			<group type="vgroup">
+				<label>0x00</label>
+				<widgetref id="1" />
+				<widgetref id="2" />
+				<widgetref id="3" />
+			</group>
+		</layout>
+	</ui>
+</faust>
