@@ -35,7 +35,7 @@ bifilter = tf2(b0,b1,b2,a1,a2) with
 
 tubestage(tb,fck,Rk) = tube : hpf with {
     lpfk = lowpass(1,fck);
-    Ftube = ffunction(float Ftube2(int,float), "valve.h", "");
+    Ftube = ffunction(float Ftube(int,float), "valve.h", "");
     vplus = 250.0;
     divider = 40;
     Rp = 100.0e3;

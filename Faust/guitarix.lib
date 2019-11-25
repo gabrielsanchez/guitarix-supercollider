@@ -97,7 +97,7 @@ tubestageF(tb,vplus,divider,fck,Rk,Vk0) = anti_aliase : tube : hpf with {
     hpf = fi.highpass(1,31.0);
 };
 
-tubestage(tb,fck,Rk,Vk0)  = tubestageF(tb,250.0,40.0,fck,Rk,Vk0);
+tubestg(tb,fck,Rk,Vk0)  = tubestageF(tb,250.0,40.0,fck,Rk,Vk0);
 tubestage130_10(tb,fck,Rk,Vk0) = tubestageF(tb,130.0,10.0,fck,Rk,Vk0);
 tubestage130_20(tb,fck,Rk,Vk0) = tubestageF(tb,130.0,20.0,fck,Rk,Vk0);
 
@@ -111,7 +111,7 @@ tubestage130_20(tb,fck,Rk,Vk0) = tubestageF(tb,130.0,20.0,fck,Rk,Vk0);
 //				F :	frequency (Hz)
 //				G : gain [0..1]
 //---------------------------------------------------------------
-// from "bandfilter.dsp" in the faust2pd distribution 
+// from "bandfilter.dsp" in the faust2pd distribution
 // which was released under the BSD license.
 
 eqfilter(Q,F,G)	= fi.TF2(  (1 +  K/Q + K*K) 	/ D,
@@ -137,8 +137,8 @@ ifilter(Q,F,G) = eqfilter(Q,F,1/G);
 //----- flangerstereo -> pf.flanger_stereo
 
 flangermonoN(dmax,curdel,depth,fb,invert)
-  = _ <: _, (-:de.fdelay(dmax,curdel)) ~ *(fb) : _, 
-  *(select2(invert,depth,0-depth)) 
+  = _ <: _, (-:de.fdelay(dmax,curdel)) ~ *(fb) : _,
+  *(select2(invert,depth,0-depth))
   : + : *(0.5);
 
 flangerstereoN(dmax,curdel1,curdel2,depth,fb,invert)
@@ -151,7 +151,7 @@ flangerstereoN(dmax,curdel1,curdel2,depth,fb,invert)
 
 import("stdfaust.lib");
 
-moogvcfN(Q,fr)  = (+ : fi.pole(p) : fi.pole(p) 
+moogvcfN(Q,fr)  = (+ : fi.pole(p) : fi.pole(p)
                    : fi.pole(p) : fi.pole(p) : *(scale(p))) ~ *(mk)
 with {
      p = 1.0 - fr * 2.0 * ma.PI / ma.SR; // approx for fr << ma.SR
@@ -213,7 +213,7 @@ allpass(dt,fb) = (_,_ <: (*(fb),_:+:@(dt)), -) ~ _ : (!,_);
 // This is true allpass below.
 allpass_filter(dt,fb) = (+ <:(@(dt):_),*(fb)) ~ *(-fb) : mem,_ : + ;
 
-allpass_with_fdelay(dt1,coef,dt2,dt2pos) = 
+allpass_with_fdelay(dt1,coef,dt2,dt2pos) =
 	(_,_ <: (*(coef),_:+:@(dt1):de.fdelay(dt2,dt2pos)), -) ~ _ : (!,_);
 
 comb(dt, fb, damp) = (+:@(dt)) ~ (*(1-damp) : (+ ~ *(damp)) : *(fb));

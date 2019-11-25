@@ -2,11 +2,11 @@ declare id "pre 12ax7/ push-pull 6V6"; // in amp tube ba.selector
 declare name "pre 12ax7/ push-pull 6V6";
 declare samplerate "96000";
 
-import("stdfaust.lib"); 
+import("stdfaust.lib");
 import("guitarix.lib");
 
 /****************************************************************
- ** Tube Preamp Emulation stage 1 - 2 
+ ** Tube Preamp Emulation stage 1 - 2
  *        12ax7 -> pusch pull 6V6
  */
 
@@ -28,9 +28,9 @@ process = hgroup("stage1", stage1)
 */
     atten = 0.6;
     stage1 = ef.speakerbp(310.0, 12000.0)
-     : *(preamp): (tubestage(TB_12AX7_68k,86.0,2700.0,1.581656) : + ~ (atten*tubestage(TB_12AX7_250k,132.0,1500.0,1.204285)))
-     : fi.lowpass(1,6531.0) : (tubestage(TB_12AX7_250k,132.0,1500.0,1.204285) : + ~ (atten*tubestage(TB_12AX7_250k,194.0,820.0,0.840703))) : tubestage(TB_12AX7_250k,194.0,820.0,0.840703); 
-    stage2 = fi.lowpass(1,6531.0) : *(gain1)  <: ((min(0.7,tubestage(TB_6V6_250k,6531.0,410.0,0.659761))),(max(-0.75,tubestage(TB_6V6_68k,6531.0,410.0,0.664541)))) :> 
+     : *(preamp): (tubestg(TB_12AX7_68k,86.0,2700.0,1.581656) : + ~ (atten*tubestg(TB_12AX7_250k,132.0,1500.0,1.204285)))
+     : fi.lowpass(1,6531.0) : (tubestg(TB_12AX7_250k,132.0,1500.0,1.204285) : + ~ (atten*tubestg(TB_12AX7_250k,194.0,820.0,0.840703))) : tubestg(TB_12AX7_250k,194.0,820.0,0.840703); 
+    stage2 = fi.lowpass(1,6531.0) : *(gain1)  <: ((min(0.7,tubestg(TB_6V6_250k,6531.0,410.0,0.659761))),(max(-0.75,tubestg(TB_6V6_68k,6531.0,410.0,0.664541)))) :>
     peak1
     with {
         gain1 = ampctrl.gain1;

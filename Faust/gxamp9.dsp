@@ -2,14 +2,14 @@ declare id "12ax7 feedback"; // in amp tube ba.selector
 declare name "12ax7 feedback";
 declare samplerate "96000";
 
-import("stdfaust.lib"); 
+import("stdfaust.lib");
 import("guitarix.lib");
 
 /****************************************************************
- ** Tube Preamp Emulation stage 1 - 2 
+ ** Tube Preamp Emulation stage 1 - 2
  *   12ax7 feedback
  */
- 
+
 val(x) = valve.vt(dist, q(x), x)
 with {
     dist =  40.1;
@@ -23,14 +23,14 @@ with {
 };
 
 tubeax(preamp,gain1) =  hgroup("stage1", stage1) :
-          hgroup("stage2", stage2) 
+          hgroup("stage2", stage2)
           with {
-          
+
     atten = 0.6;
-    stage1 = tubestage(TB_12AX7_68k,86.0,2700.0,1.581656) : - ~ (atten*tubestage(TB_12AX7_250k,132.0,1500.0,1.204285)) : *(preamp):
-    fi.lowpass(1,6531.0) : tubestage(TB_12AX7_250k,132.0,1500.0,1.204285): + ~ (atten*tubestage(TB_12AX7_250k,194.0,820.0,0.840702)); 
-    stage2 = fi.lowpass(1,6531.0) : tubestage(TB_12AX7_250k,194.0,820.0,0.840702) : *(gain1); 
-    
+    stage1 = tubestg(TB_12AX7_68k,86.0,2700.0,1.581656) : - ~ (atten*tubestg(TB_12AX7_250k,132.0,1500.0,1.204285)) : *(preamp):
+    fi.lowpass(1,6531.0) : tubestg(TB_12AX7_250k,132.0,1500.0,1.204285): + ~ (atten*tubestg(TB_12AX7_250k,194.0,820.0,0.840702)); 
+    stage2 = fi.lowpass(1,6531.0) : tubestg(TB_12AX7_250k,194.0,820.0,0.840702) : *(gain1);
+
 } ;
 
 process = val : component("gxdistortion.dsp").dist1(drive,wet_dry) : tubeax(preamp,gain1) with {

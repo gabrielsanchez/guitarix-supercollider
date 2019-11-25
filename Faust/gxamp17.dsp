@@ -2,14 +2,14 @@ declare id "12AT7 feedback"; // in amp tube ba.selector
 declare name "12AT7 feedback";
 declare samplerate "96000";
 
-import("stdfaust.lib"); 
+import("stdfaust.lib");
 import("guitarix.lib");
 
 /****************************************************************
- ** Tube Preamp Emulation stage 1 - 2 
+ ** Tube Preamp Emulation stage 1 - 2
  *   12AT7  feedback
  */
- 
+
 val(x) = valve.vt(dist, q(x), x)
 with {
     dist =  40.1;
@@ -23,13 +23,13 @@ with {
 };
 
 tubeax(preamp,gain1) =  hgroup("stage1", stage1) :
-          hgroup("stage2", stage2) 
+          hgroup("stage2", stage2)
           with {
 
     atten = 0.6;
-    stage1 = tubestage(TB_12AT7_68k,86.0,2700.0,2.617753) : - ~ (atten*tubestage(TB_12AT7_250k,132.0,1500.0,1.887332)) : *(preamp):
-    fi.lowpass(1,6531.0) : tubestage(TB_12AT7_250k,132.0,1500.0,1.887332): + ~ (atten*tubestage(TB_12AT7_250k,194.0,820.0,1.256962)); 
-    stage2 = fi.lowpass(1,6531.0) : tubestage(TB_12AT7_250k,194.0,820.0,1.256962) : *(gain1); 
+    stage1 = tubestg(TB_12AT7_68k,86.0,2700.0,2.617753) : - ~ (atten*tubestg(TB_12AT7_250k,132.0,1500.0,1.887332)) : *(preamp):
+    fi.lowpass(1,6531.0) : tubestg(TB_12AT7_250k,132.0,1500.0,1.887332): + ~ (atten*tubestg(TB_12AT7_250k,194.0,820.0,1.256962));
+    stage2 = fi.lowpass(1,6531.0) : tubestg(TB_12AT7_250k,194.0,820.0,1.256962) : *(gain1);
 
 } ;
 

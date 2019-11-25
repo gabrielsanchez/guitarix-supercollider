@@ -7,7 +7,7 @@
 // kp: 629
 // kvb: 446
 
-table1d_imp<2001> tubetable_6C16[2] __rt_data = 
+table1d_imp<2001> tubetable_6C16[2] = 
 {
   {
     // Ri = 68k

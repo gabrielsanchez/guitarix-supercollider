@@ -2,13 +2,13 @@ declare id "pre 12AU7/ master 6V6"; // in amp tube ba.selector
 declare name "pre 12AU7/ master 6V6";
 declare samplerate "96000";
 
-import("stdfaust.lib"); 
+import("stdfaust.lib");
 import("guitarix.lib");
 
 /****************************************************************
- ** Tube Preamp Emulation stage 1 - 2 
+ ** Tube Preamp Emulation stage 1 - 2
  */
- 
+
 bifilter = fi.tf2(b0,b1,b2,a1,a2) with
 {
     c = 1.059;
@@ -34,8 +34,8 @@ bifilter = fi.tf2(b0,b1,b2,a1,a2) with
 };
 
 process = hgroup("stage1", stage1) :
-          component("gxdistortion.dsp").dist(drive,wet_dry) : 
-          hgroup("stage2", stage2) 
+          component("gxdistortion.dsp").dist(drive,wet_dry) :
+          hgroup("stage2", stage2)
           with {
     drive = ampctrl.drive;
     wet_dry = ampctrl.wet_dry;
@@ -46,8 +46,8 @@ process = hgroup("stage1", stage1) :
     preamp =  vslider(".amp2.stage1.Pregain[alias]",0,-20,20,0.1) : ba.db2linear : smoothi(0.999);
 */
     stage1 = *(preamp): tubestage130_10(TB_12AU7_68k,86.0,2700.0,1.257240) :
-    fi.lowpass(1,6531.0) : tubestage130_10(TB_12AU7_250k,132.0,1500.0,0.776162): tubestage130_10(TB_12AU7_250k,194.0,820.0,0.445487); 
-    stage2 = fi.lowpass(1,6531.0) : *(gain1) <: (tubestage(TB_6V6_250k,6531.0,820.0,1.130462),tubestage(TB_6V6_68k,6531.0,820.0,1.130740)) :>_
+    fi.lowpass(1,6531.0) : tubestage130_10(TB_12AU7_250k,132.0,1500.0,0.776162): tubestage130_10(TB_12AU7_250k,194.0,820.0,0.445487);
+    stage2 = fi.lowpass(1,6531.0) : *(gain1) <: (tubestg(TB_6V6_250k,6531.0,820.0,1.130462),tubestg(TB_6V6_68k,6531.0,820.0,1.130740)) :>_
     with {
         gain1 = ampctrl.gain1;
     /*
